@@ -22,9 +22,13 @@
 * https://subscription.packtpub.com/book/application_development/9781783984985/1/ch01lvl1sec16/creating-a-qgis-plugin 
 * https://gis-ops.com/qgis-3-plugin-tutorial-plugin-development-explained-part-1/ 
 
-### Managing dependencies via packaging wheels
-* https://gis.stackexchange.com/a/349502 
-* https://realpython.com/python-wheels/#python-packaging-made-better-an-intro-to-python-wheels 
+### Managing dependencies:
+* Packaging them by including wheels:
+   * https://gis.stackexchange.com/a/349502 
+   * https://realpython.com/python-wheels/#python-packaging-made-better-an-intro-to-python-wheels 
+* One might want to set the minimum QGIS version for the plugin to be that point at which linux, macos, and windows versions were all bundling `scipy` and `numpy`, which we will need to determine.
+  * `3.4.5 MacOS` does not allow `import scipy` from the Python console. 
+  * For people whose installations still don't have those dependencies and/or for people who want to try to get the plugin to work for earlier versions (for which they'd also have to manually modify a configuration file in the plugin, I assume?), we may want to eventually develop some pointers as to how to get `scipy` etc. installed on various platforms in a way that is visible to QGISes on those platforms, as some past instructions exist. See: https://gis.stackexchange.com/questions/366848/scp-plugin-for-qgis-3-10-on-mac
 
 ### Adding submodule
 * https://github.blog/2016-02-01-working-with-submodules/ 
