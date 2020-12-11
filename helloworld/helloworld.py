@@ -188,6 +188,13 @@ class helloWorld:
         if self.first_start == True:
             self.first_start = False
             self.dlg = helloWorldDialog()
+			
+		# Fetch the currently loaded layers
+		layers = QgsProject.instance().layerTreeRoot().children()
+		# Clear the contents of the comboBox from previous runs
+		self.dlg.comboBox.clear()
+		# Populate the comboBox with names of all the loaded layers
+		self.dlg.comboBox.addItems([layer.name() for layer in layers])
 
         # show the dialog
         self.dlg.show()
