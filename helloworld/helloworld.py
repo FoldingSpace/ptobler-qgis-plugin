@@ -23,7 +23,9 @@
 """
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QAction
+from qgis.PyQt.QtWidgets import QAction, QFileDialog
+from qgis.core import QgsProject
+
 
 # Initialize Qt resources from file resources.py
 from .resources import *
@@ -179,6 +181,18 @@ class helloWorld:
                 action)
             self.iface.removeToolBarIcon(action)
 
+    def browse_datasets(self):
+        filename = QFileDialog.getOpenFileName()
+        fname = filename[0].split('/')[-1]
+        self.dlg.comboBox.addItem(fname)
+        self.dlg.comboBox.setCurrentText(fname)
+
+
+    def browse_projections(self):
+        filename = QFileDialog.getOpenFileName()
+        fname = filename[0].split('/')[-1]
+        self.dlg.projText.setText(fname)
+
 
     def run(self):
         """Run method that performs all the real work"""
@@ -188,13 +202,15 @@ class helloWorld:
         if self.first_start == True:
             self.first_start = False
             self.dlg = helloWorldDialog()
-			
-		# Fetch the currently loaded layers
-		layers = QgsProject.instance().layerTreeRoot().children()
-		# Clear the contents of the comboBox from previous runs
-		self.dlg.comboBox.clear()
-		# Populate the comboBox with names of all the loaded layers
-		self.dlg.comboBox.addItems([layer.name() for layer in layers])
+            self.dlg.browseButton.clicked.connect(self.browse_datasets)
+            self.dlg.browseButton2.clicked.connect(self.browse_projections)
+
+        # Fetch the currently loaded layers
+        layers = QgsProject.instance().layerTreeRoot().children()
+        # Clear the contents of the comboBox from previous runs
+        self.dlg.comboBox.clear()
+        # Populate the comboBox with names of all the loaded layers
+        self.dlg.comboBox.addItems([layer.name() for layer in layers])
 
         # show the dialog
         self.dlg.show()
