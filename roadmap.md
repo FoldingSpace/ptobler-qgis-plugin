@@ -6,6 +6,9 @@
 1. Plugin loads a vector layer from QGIS into plugin code using `pyqgis`
    1. See https://docs.qgis.org/3.16/en/docs/pyqgis_developer_cookbook/vector.html and https://docs.qgis.org/3.16/en/docs/pyqgis_developer_cookbook/vector.html#creating-vector-layers
 1. Modifies the geometry of that layer somehow
+1. Convert a qgis layer that the user specifies (via a GUI input widget) to a geopandas geodataframe object... _and back again._  These might help:
+   1. Use this workflow plus a version edited to run 'in reverse'? https://gis.stackexchange.com/questions/362979/loading-geodataframe-as-qgis-vector-layer-without-exporting-to-shapefile
+   1. Perhaps also of use: https://anitagraser.com/2018/11/18/movement-data-in-gis-16-towards-pure-python-trajectories-using-geopandas/
 1. Makes basic connections to our library (via a submodule), importing it, tests out functionality (can equally be done before any of the more substantial pyqgis coding above)
 1. Hardcoding all of the above to make the plugin, QGIS vector layer modification, and basic reprojections to work more or less together. Projections do not need to be user-inputted yet.
 1. UI design charrette
